@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //private variables
-    private float speed = 10.0f;
-    public float turnSpeed = 500.0f;
+    public float speed = 10.0f;
+    public float turnSpeed = 100.0f;
     private Rigidbody playerRb;
     
 
@@ -31,4 +31,24 @@ public class PlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput); //vertical movement
         transform.Rotate(Vector3.up * Time.deltaTime * turnSpeed * horizontalInput); //side-to-side movement
     }
+
+    //damage enemy on collision
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //Damage player
+        }
+    }
+
+    //destroy powerup on collision
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Powerup"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
+
 }
