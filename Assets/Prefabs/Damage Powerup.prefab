@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 2589361540366232630}
   - component: {fileID: 2589361540366232629}
   - component: {fileID: 2589361540366232628}
+  - component: {fileID: -3959297439764670340}
   m_Layer: 0
-  m_Name: Powerup
+  m_Name: Damage Powerup
   m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b7dbe43c86080f408929983a7c2a0a3, type: 2}
+  - {fileID: 2100000, guid: 699eb87a8a4084a459ef45ab2da29c5b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,3 +99,16 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3959297439764670340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2589361540366232627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3735d24474cc64585d26aa7c94208c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerupType: 1
