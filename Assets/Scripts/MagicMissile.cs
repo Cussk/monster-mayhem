@@ -20,7 +20,7 @@ public class MagicMissile : MonoBehaviour
             //missile moving toward target
             Vector3 moveDirection = (target.transform.position - transform.position).normalized;
             //missile movement speed
-            transform.position = moveDirection * speed * Time.deltaTime;
+            transform.position += moveDirection * speed * Time.deltaTime;
             //faces missile to target
             transform.LookAt(target);
         }

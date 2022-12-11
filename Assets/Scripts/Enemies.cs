@@ -14,7 +14,6 @@ public class Enemies : MonoBehaviour
     private float nextSpawn;
     private Rigidbody enemyRb;
     private GameObject player;
-    private SpawnManager spawnManager;
     private MiniEnemyAbility miniEnemyAbility;
 
     // Start is called before the first frame update
@@ -26,7 +25,6 @@ public class Enemies : MonoBehaviour
         //if there is a boss get spawn manager
         if (isBoss)
         {
-            spawnManager = FindObjectOfType<SpawnManager>();
             miniEnemyAbility = FindObjectOfType<MiniEnemyAbility>();
         }
         

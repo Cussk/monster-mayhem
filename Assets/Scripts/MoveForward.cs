@@ -5,7 +5,8 @@ using UnityEngine;
 public class MoveForward : MonoBehaviour
 {
     //private variables
-    private float speed = 40.0f;
+    private float speed = 30.0f;
+    private float aliveTimer = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -17,5 +18,6 @@ public class MoveForward : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        Destroy(gameObject, aliveTimer);
     }
 }
