@@ -8,12 +8,15 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerup;
     public GameObject powerupIndicator;
     public GameObject missilePrefab;
+    public GameObject arrowPrefab;
+    public Transform arrowSpawnPoint;
     public PowerupType currentPowerup = PowerupType.None;
 
     //private variables
-    private float speed = 10.0f;
+    private float speed = 400.0f;
     private float powerupStrength = 10.0f;
     private float powerupDamage = 1.0f;
+    private Rigidbody playerRb;
     private GameObject tmpMissile;
     private Coroutine powerupCountdown;
     private SpawnManager spawnManager;
@@ -21,6 +24,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerRb= GetComponent<Rigidbody>();
         spawnManager = FindObjectOfType<SpawnManager>();
     }
 
@@ -48,8 +52,8 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput); //vertical movement
-        transform.Translate(Vector3.right * Time.deltaTime *speed * horizontalInput); //side-to-side movement
+        playerRb.AddForce(Vector3.forward * speed * verticalInput); //vertical movement
+        playerRb.AddForce(Vector3.right * speed * horizontalInput); //side-to-side movement
     }
 
     //damage enemy on collision
@@ -87,6 +91,12 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(powerupCountdown);
         }
         powerupCountdown = StartCoroutine(PowerupCountdownRoutine());
+
+        if (other.gameObject.CompareTag("Heart"))
+        {
+            //add life
+            Destroy(other.gameObject);
+        }
     }
 
     //coroutine powerup countdown after 5 seconds deactivate, spawn new powerup
@@ -104,11 +114,14 @@ public class PlayerController : MonoBehaviour
         foreach (var enemy in FindObjectsOfType<Enemies>())
         {
             //spawns rockets, launches in y-axis to not pushback player, no quaternion rotation
-            tmpMissile = Instantiate(missilePrefab, transform.position +Vector3.up, Quaternion.identity);
+            tmpMissile = Instantiate(missilePrefab, transform.position + Vector3.up, Quaternion.identity);
             //Calls Fire method and targets enemies
             tmpMissile.GetComponent<MagicMissile>().Fire(enemy.transform);
         }
     }
 
-
+    void FireArrow()
+    {
+        Instantiate(arrowPrefab, arrowSpawnPoint.position, arrowPrefab.transform.rotation);
+    }
 }

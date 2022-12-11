@@ -42,6 +42,11 @@ public class SpawnManager : MonoBehaviour
             {
                 SpawnBossWave(); //spawn boss
                 SpawnHeart(); //spawn heart
+                //if spawning boss exists activate mini spawn ability
+                if (bossPrefabs[0] != null)
+                {
+                    miniEnemyAbility.MiniSpawn(waveNumber);
+                }
             }
             else
             {
@@ -90,7 +95,7 @@ public class SpawnManager : MonoBehaviour
         float spawnPosX = Random.Range(-spawnRange, spawnRange);
         float spawnPosZ = Random.Range(-spawnRange, spawnRange);
 
-        Vector3 randomPos = new Vector3(spawnPosX, 0, spawnPosZ);
+        Vector3 randomPos = new Vector3(spawnPosX, 0.5f, spawnPosZ);
 
         return randomPos;
     }
