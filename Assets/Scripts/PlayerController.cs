@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     //private variables
     private float speed = 400.0f;
     private float powerupStrength = 10.0f;
-    private float powerupDamage = 1.0f;
     private Rigidbody playerRb;
     private GameObject tmpMissile;
     private Coroutine powerupCountdown;
@@ -62,11 +61,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") && currentPowerup == PowerupType.Damage)
         {
             Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            //Damage enemy
+            enemyRigidbody.GetComponent<EnemyHealth>().EnemyDamage(1);
             //collision direction away
             Vector3 awayFromPlayer = collision.gameObject.transform.position;
             //push force from collision
             enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
-            //Damage enemy
+            
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Heart"))
         {
             //add life
+            //GameManager.AddLives(1);
             Destroy(other.gameObject);
         }
     }

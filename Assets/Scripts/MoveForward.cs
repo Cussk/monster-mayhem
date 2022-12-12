@@ -6,13 +6,7 @@ public class MoveForward : MonoBehaviour
 {
     //private variables
     private float speed = 30.0f;
-    private float aliveTimer = 2.0f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float aliveTimer = 1.5f;
 
     // Update is called once per frame
     void Update()
@@ -20,4 +14,16 @@ public class MoveForward : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
         Destroy(gameObject, aliveTimer);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            //Damage enemy
+            other.GetComponent<EnemyHealth>().EnemyDamage(1);
+            //destroy arrow
+            Destroy(gameObject);
+        }
+    }
+
 }
