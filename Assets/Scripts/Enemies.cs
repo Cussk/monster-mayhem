@@ -14,18 +14,20 @@ public class Enemies : MonoBehaviour
     private float nextSpawn;
     private Rigidbody enemyRb;
     private GameObject player;
-    private MiniEnemyAbility miniEnemyAbility;
+    private SpawnManager spawnManager;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
 
         //if there is a boss get spawn manager
         if (isBoss)
         {
-            miniEnemyAbility = FindObjectOfType<MiniEnemyAbility>();
+            spawnManager = FindObjectOfType<SpawnManager>();
         }
         
     }
@@ -33,8 +35,12 @@ public class Enemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FollowPlayer();
-        MiniEnemySpawn();
+        if (gameManager.isGameActive)
+        {
+            FollowPlayer();
+            MiniEnemySpawn();
+        }
+        
     }
 
     private void FollowPlayer()
@@ -54,7 +60,7 @@ public class Enemies : MonoBehaviour
                 //next spawn time is equal to game time plus length of spawnINterval
                 nextSpawn = Time.time + spawnInterval;
                 //calls spawn manger to spawn a certain amonut of mini enemies
-                miniEnemyAbility.SpawnMiniEnemy(miniEnemySpawnCount);
+                spawnManager.SpawnMiniEnemy(miniEnemySpawnCount);
             }
         }
     }

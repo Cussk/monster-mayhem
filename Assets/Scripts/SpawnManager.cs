@@ -17,16 +17,17 @@ public class SpawnManager : MonoBehaviour
 
     //private variables
     private float spawnRange = 20.0f;
-    private MiniEnemyAbility miniEnemyAbility;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        miniEnemyAbility = FindObjectOfType<MiniEnemyAbility>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         //initial enemy wave
         SpawnEnemyWave(waveNumber);
         //initial powerup
         SpawnPowerup();
+        
     }
 
     // Update is called once per frame
@@ -40,13 +41,8 @@ public class SpawnManager : MonoBehaviour
 
             if (waveNumber % bossRound == 0)
             {
-                SpawnBossWave(); //spawn boss
+                SpawnBossWave(waveNumber); //spawn boss
                 SpawnHeart(); //spawn heart
-                //if spawning boss exists activate mini spawn ability
-                if (bossPrefabs[0] != null)
-                {
-                    miniEnemyAbility.MiniSpawn(waveNumber);
-                }
             }
             else
             {
@@ -69,11 +65,38 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    //spawns random boss
-    void SpawnBossWave()
+    void SpawnBossWave(int currentRound)
     {
         int randomBoss = Random.Range(0, bossPrefabs.Length);
-        Instantiate(bossPrefabs[randomBoss], GenerateSpawnPosition(), bossPrefabs[randomBoss].transform.rotation);
+        int miniEnemysToSpawn;
+
+        //if it is a boss round
+        if (bossRound != 0)
+        {
+            //variable equal to currentround divided by boss round
+            miniEnemysToSpawn = currentRound / bossRound;
+        }
+        else
+        {
+            miniEnemysToSpawn = 1;
+        }
+
+        //boss variable to spawn boss prefab
+        var boss = Instantiate(bossPrefabs[randomBoss], GenerateSpawnPosition(), bossPrefabs[randomBoss].transform.rotation);
+
+        //get miniEnemySpawnCount from enemy script and make equal to miniEnemysToSpawn variable
+        boss.GetComponent<Enemies>().miniEnemySpawnCount = miniEnemysToSpawn;
+    }
+
+    //spawns random mini enemy
+    public void SpawnMiniEnemy(int amount)
+    {
+        //loops amount of mini enemies spawned until argument amount reached
+        for (int i = 0; i < amount; i++)
+        {
+            int randomMini = Random.Range(0, miniEnemyPrefabs.Length);
+            Instantiate(miniEnemyPrefabs[randomMini], GenerateSpawnPosition(), miniEnemyPrefabs[randomMini].transform.rotation);
+        }
     }
 
     //spawn random powerup

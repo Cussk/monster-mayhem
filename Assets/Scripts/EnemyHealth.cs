@@ -20,13 +20,9 @@ public class EnemyHealth : MonoBehaviour
         healthSlider.maxValue = maxHealth;
         healthSlider.value = maxHealth;
         healthSlider.fillRect.gameObject.SetActive(true);
-        
-    }
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
     }
 
     public void EnemyDamage(int damage)
@@ -35,10 +31,11 @@ public class EnemyHealth : MonoBehaviour
         healthSlider.fillRect.gameObject.SetActive(true);
         healthSlider.value = currentHealth;
 
-        if (currentHealth < 1)
+        if (currentHealth < 1 && gameManager.isGameActive)
         {
-            //SgameManager.Addscore(maxHealth);
+            gameManager.UpdateScore(maxHealth);
             Destroy(gameObject, 0.1f);
+
         }
     }
 }

@@ -18,31 +18,37 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private GameObject tmpMissile;
     private Coroutine powerupCountdown;
+    private GameManager gameManager;
     private SpawnManager spawnManager;
     
     // Start is called before the first frame update
     void Start()
     {
         playerRb= GetComponent<Rigidbody>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         spawnManager = FindObjectOfType<SpawnManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
-        //attaches indicator on movement
-        powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
-        //powertype missile and presses F key fires missiles
-        if (currentPowerup == PowerupType.MagicMissile && Input.GetKeyDown(KeyCode.F))
+        if (gameManager.isGameActive)
         {
-            LaunchMissiles();
+            MovePlayer();
+            //attaches indicator on movement
         }
-        //powerup type Arrows and presses space bar, fire arrows
-        if (currentPowerup == PowerupType.Arrows && Input.GetKeyDown(KeyCode.Space)) 
-        {
-            FireArrow();
-        }
+            powerupIndicator.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+            //powertype missile and presses F key fires missiles
+            if (currentPowerup == PowerupType.MagicMissile && Input.GetKeyDown(KeyCode.F))
+            {
+                LaunchMissiles();
+            }
+            //powerup type Arrows and presses space bar, fire arrows
+            if (currentPowerup == PowerupType.Arrows && Input.GetKeyDown(KeyCode.Space))
+            {
+                FireArrow();
+            }
+        
     }
 
     //moves player with arrow/wasd
@@ -69,9 +75,10 @@ public class PlayerController : MonoBehaviour
             enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
             
         }
-        else if (collision.gameObject.CompareTag("Enemy"))
+        else if (collision.gameObject.CompareTag("Enemy") && currentPowerup == PowerupType.None)
         {
             //damage player
+            gameManager.UpdateLives(-1);
         }
     }
 
@@ -96,7 +103,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Heart"))
         {
             //add life
-            //GameManager.AddLives(1);
+            gameManager.UpdateLives(+1);
             Destroy(other.gameObject);
         }
     }

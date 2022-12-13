@@ -9,7 +9,7 @@ public class MagicMissile : MonoBehaviour
     private bool homing;
     private float speed = 15.0f;
     private float missileStrength = 15.0f;
-    private float aliveTimer = 5.0f;
+    private float aliveTimer = 2.0f;
 
     // Update is called once per frame
     void Update()
