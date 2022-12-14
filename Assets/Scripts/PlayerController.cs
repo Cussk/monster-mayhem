@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     public PowerupType currentPowerup = PowerupType.None;
 
     //private variables
-    private float speed = 400.0f;
-    private float powerupStrength = 10.0f;
+    private float speed = 800.0f;
+    private float powerupStrength = 20.0f;
     private Rigidbody playerRb;
     private GameObject tmpMissile;
     private Coroutine powerupCountdown;

@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         lives += livesToChange;
         livesText.text = "Lives: " + lives;
-        if (lives <= 0)
+        if (lives == 0)
         {
             GameOver();
         }

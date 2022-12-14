@@ -7,7 +7,7 @@ public class FollowPlayer : MonoBehaviour
     //public variables
     public GameObject player;
 
-    private Vector3 offset = new Vector3(0.0f, 12.0f, 0.5f);
+    private Vector3 offset = new Vector3(0.0f, 11.0f, -5.0f);
 
     // LateUpdate is called once per frame after regular update
     void LateUpdate()
