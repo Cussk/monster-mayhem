@@ -21,8 +21,6 @@ public class EnemyHealth : MonoBehaviour
         healthSlider.value = maxHealth;
         healthSlider.fillRect.gameObject.SetActive(true);
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
-
-
     }
 
     public void EnemyDamage(int damage)

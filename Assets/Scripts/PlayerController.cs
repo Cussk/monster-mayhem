@@ -13,8 +13,8 @@ public class PlayerController : MonoBehaviour
     public PowerupType currentPowerup = PowerupType.None;
 
     //private variables
-    private float speed = 800.0f;
-    private float powerupStrength = 20.0f;
+    private float speed = 300.0f;
+    private float powerupStrength = 75.0f;
     private Rigidbody playerRb;
     private GameObject tmpMissile;
     private Coroutine powerupCountdown;
@@ -57,8 +57,8 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        playerRb.AddForce(Vector3.forward * speed * verticalInput); //vertical movement
-        playerRb.AddForce(Vector3.right * speed * horizontalInput); //side-to-side movement
+        playerRb.AddForce(Vector3.forward.normalized * speed * verticalInput); //vertical movement
+        playerRb.AddForce(Vector3.right.normalized * speed * horizontalInput); //side-to-side movement
     }
 
     //damage enemy on collision
@@ -77,6 +77,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy") && currentPowerup == PowerupType.None)
         {
+            Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            //collision direction away
+            Vector3 awayFromPlayer = collision.gameObject.transform.position;
+            //push force from collision
+            enemyRigidbody.AddForce(awayFromPlayer * 50.0f, ForceMode.Impulse);
             //damage player
             gameManager.UpdateLives(-1);
         }

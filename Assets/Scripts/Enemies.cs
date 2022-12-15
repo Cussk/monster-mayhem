@@ -13,6 +13,7 @@ public class Enemies : MonoBehaviour
     //private variables
     private float nextSpawn;
     private Rigidbody enemyRb;
+    private Animator enemyAnim;
     private GameObject player;
     private SpawnManager spawnManager;
     private GameManager gameManager;

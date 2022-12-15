@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9740920fb6603bb459983b2bf6f454e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 150
+  speed: 200
   spawnInterval: 0
   miniEnemySpawnCount: 0
   isBoss: 0
@@ -229,7 +229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1711957983423706354, guid: de5a27b8882e4494f96d5db765636d9e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 5
+      value: 2.6
       objectReference: {fileID: 0}
     - target: {fileID: 1711957983423706354, guid: de5a27b8882e4494f96d5db765636d9e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

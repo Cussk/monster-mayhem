@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MagicMissile : MonoBehaviour
 {
+    //public variables
+    public AudioClip boom;
     //private variables
     private Transform target;
     private bool homing;
