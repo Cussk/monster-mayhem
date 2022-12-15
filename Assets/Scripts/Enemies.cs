@@ -34,7 +34,7 @@ public class Enemies : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (gameManager.isGameActive)
         {
