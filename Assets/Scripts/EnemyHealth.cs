@@ -19,7 +19,6 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = maxHealth;
-        healthSlider.fillRect.gameObject.SetActive(true);
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 

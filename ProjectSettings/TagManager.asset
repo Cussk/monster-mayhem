@@ -7,7 +7,6 @@ TagManager:
   - Enemy
   - Powerup
   - Heart
-  - Arrow
   layers:
   - Default
   - TransparentFX
