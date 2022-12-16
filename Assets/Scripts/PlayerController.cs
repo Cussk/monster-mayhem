@@ -13,16 +13,16 @@ public class PlayerController : MonoBehaviour
     public PowerupType currentPowerup = PowerupType.None;
 
     //private variables
-    private float speed = 300.0f;
-    private float powerupStrength = 75.0f;
+    [SerializeField] private float speed = 300.0f;
+    [SerializeField] private float powerupStrength = 75.0f;
     private Rigidbody playerRb;
     private GameObject tmpMissile;
     private Coroutine powerupCountdown;
     private GameManager gameManager;
     private SpawnManager spawnManager;
     
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called on scene load
+    void Awake()
     {
         playerRb= GetComponent<Rigidbody>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();

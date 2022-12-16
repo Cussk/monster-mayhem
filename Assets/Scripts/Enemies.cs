@@ -5,12 +5,12 @@ using UnityEngine;
 public class Enemies : MonoBehaviour
 {
     //public variables 
-    public float speed = 150.0f;
     public float spawnInterval;
     public int miniEnemySpawnCount;
     public bool isBoss = false;
 
     //private variables
+    [SerializeField] private float speed = 150.0f;
     private float nextSpawn;
     private Rigidbody enemyRb;
     private Animator enemyAnim;
@@ -18,8 +18,8 @@ public class Enemies : MonoBehaviour
     private SpawnManager spawnManager;
     private GameManager gameManager;
 
-    // Start is called before the first frame update
-    void Start()
+    // Awake is called on scene load
+    void Awake()
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         enemyRb = GetComponent<Rigidbody>();

@@ -166,6 +166,8 @@ MonoBehaviour:
   arrowPrefab: {fileID: 5452166480270562645, guid: 8217ce98ed592d64c9513f6a6bf356b5, type: 3}
   arrowSpawnPoint: {fileID: 8836668446985083071}
   currentPowerup: 0
+  speed: 1000
+  powerupStrength: 75
 --- !u!1001 &5675912744579712443
 PrefabInstance:
   m_ObjectHideFlags: 0
